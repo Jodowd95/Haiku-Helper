@@ -191,7 +191,10 @@ class _HaikuHelperState extends State<HaikuHelper> {
                 ),
                 FlatButton(
                   padding: EdgeInsets.all(12.0),
-                  onPressed: ()=> share(lineController1, lineController2, lineController3),
+                  onPressed: (){
+                    _formKey.currentState.save();
+                    share(lineController1, lineController2, lineController3);
+                  },
                   child: Text(
                     "Share",
                     style:  TextStyle(color: Colors.white),
