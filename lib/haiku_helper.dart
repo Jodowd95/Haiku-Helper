@@ -16,9 +16,7 @@ class _HaikuHelperState extends State<HaikuHelper> {
   final lineController1 = TextEditingController();
   final lineController2 = TextEditingController();
   final lineController3 = TextEditingController();
-  String _line1;
-  String _line2;
-  String _line3;
+
   final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
@@ -97,9 +95,6 @@ class _HaikuHelperState extends State<HaikuHelper> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     controller: lineController1,
-//                    onSaved: (String val) {
-//                      _line1 = val.replaceAll(" ", '');
-//                    },
                     validator: (String value) {
                       value = value.trim();
                      return syllableValidator(value, 5);
@@ -115,9 +110,6 @@ class _HaikuHelperState extends State<HaikuHelper> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     controller: lineController2,
-//                    onSaved: (String val) {
-//                      _line2 = val.replaceAll(" ", '');
-//                    },
                     validator: (String value) {
                       value = value.trim();
                       return syllableValidator(value, 7);
@@ -133,9 +125,6 @@ class _HaikuHelperState extends State<HaikuHelper> {
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     controller: lineController3,
-//                    onSaved: (String val) {
-//                      _line3 = val.replaceAll(" ", '');
-//                    },
                     validator: (String value) {
                       value = value.trim();
                       return syllableValidator(value, 5);
