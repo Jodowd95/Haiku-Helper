@@ -7,6 +7,5 @@ void share(TextEditingController one, TextEditingController two, TextEditingCont
   final String line3 = three.text;
   final String text = line1 + "\n\n"+ line2 + "\n\n"+line3;
 
-
   Share.share(text);
 }

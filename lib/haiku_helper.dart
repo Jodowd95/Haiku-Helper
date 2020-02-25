@@ -16,7 +16,9 @@ class _HaikuHelperState extends State<HaikuHelper> {
   final lineController1 = TextEditingController();
   final lineController2 = TextEditingController();
   final lineController3 = TextEditingController();
-
+  String line1;
+  String line2;
+  String line3;
   final _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
 
@@ -75,125 +77,147 @@ class _HaikuHelperState extends State<HaikuHelper> {
           builder: (context) => Form(
             key: _formKey,
             autovalidate: _autoValidate,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                //title
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Type your Haiku below",
-                    style: TextStyle(fontSize: 24.0),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                ),
-                //first line
-                Padding(
-                  padding: const EdgeInsets.only(left:5.0,right: 5.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: lineController1,
-                    validator: (String value) {
-                      value = value.trim();
-                     return syllableValidator(value, 5);
-                    },
-                    decoration: InputDecoration(
-                      hintText: " Enter 5 syllables",
+            child: Center(
+              child: ListView(
+                shrinkWrap: true,
+               // mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  //title
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Type your Haiku below",
+                      style: TextStyle(fontSize: 24.0),
                     ),
                   ),
-                ),
-                //second line
-                Padding(
-                  padding: const EdgeInsets.only(left:5.0,right: 5.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: lineController2,
-                    validator: (String value) {
-                      value = value.trim();
-                      return syllableValidator(value, 7);
-                    },
-                    decoration: InputDecoration(
-                      hintText: " Enter 7 syllables",
-                    ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
                   ),
-                ),
-                //3rd line
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0,right: 5.0),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: lineController3,
-                    validator: (String value) {
-                      value = value.trim();
-                      return syllableValidator(value, 5);
-                    },
-                    decoration: InputDecoration(
-                      hintText: " Enter 5 syllables",
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    FlatButton(
-                      padding: EdgeInsets.all(12.0),
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          final snackbar = SnackBar(
-                            content: Text('Your poem looks good!'),
-                          );
-                          Scaffold.of(context).showSnackBar(snackbar);
-                        }
+                  //first line
+                  Padding(
+                    padding: const EdgeInsets.only(left:5.0,right: 5.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      onSaved: (val){
+                        line1 = lineController1.text;
                       },
-                      child: Text(
-                        'Check Haiku',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      color: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blueAccent)),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(16.0),
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(12.0),
-                      onPressed: () {
-                        _formKey.currentState.reset();
+                      controller: lineController1,
+                      validator: (String value) {
+                        value = value.trim();
+                       return syllableValidator(value, 5);
                       },
-                      child: Text(
-                        'Clear Haiku',
-                        style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        hintText: " Enter 5 syllables",
                       ),
-                      color: Colors.blue,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(18.0),
-                          side: BorderSide(color: Colors.blueAccent)),
                     ),
-                  ],
-                ),
-                FlatButton(
-                  padding: EdgeInsets.all(12.0),
-                  onPressed: (){
-                    _formKey.currentState.save();
-                    share(lineController1, lineController2, lineController3);
-                  },
-                  child: Text(
-                    "Share",
-                    style:  TextStyle(color: Colors.white),
                   ),
-                  color: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.blueAccent)),
-                ),
-              ],
+                  //second line
+                  Padding(
+                    padding: const EdgeInsets.only(left:5.0,right: 5.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: lineController2,
+                      onSaved: (val){
+                        line2 = lineController2.text;
+                      },
+                      validator: (String value) {
+                        value = value.trim();
+                        return syllableValidator(value, 7);
+                      },
+                      decoration: InputDecoration(
+                        hintText: " Enter 7 syllables",
+                      ),
+                    ),
+                  ),
+                  //3rd line
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0,right: 5.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: lineController3,
+                      onSaved: (val){
+                        line3 = lineController3.text;
+                      },
+                      validator: (String value) {
+                        value = value.trim();
+                        return syllableValidator(value, 5);
+                      },
+                      decoration: InputDecoration(
+                        hintText: " Enter 5 syllables",
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      FlatButton(
+                        padding: EdgeInsets.all(12.0),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            final snackbar = SnackBar(
+                              content: Text('Your poem looks good!'),
+                            );
+                            Scaffold.of(context).showSnackBar(snackbar);
+                          }
+                        },
+                        child: Text(
+                          'Check Haiku',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blueAccent)),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16.0),
+                      ),
+                      FlatButton(
+                        padding: EdgeInsets.all(12.0),
+                        onPressed: () {
+                          _formKey.currentState.reset();
+                        },
+                        child: Text(
+                          'Clear Haiku',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blueAccent)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      FlatButton(
+                        padding: EdgeInsets.all(12.0),
+                        onPressed: () async {
+                          _formKey.currentState.save();
+                          setState(() {
+                          });
+                         await share(lineController1, lineController2, lineController3);
+                         lineController1.text = line1;
+                         lineController2.text = line2;
+                         lineController3.text = line3;
+                        },
+                        child: Text(
+                          "Share",
+                          style:  TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.blueAccent)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ));
@@ -250,3 +274,5 @@ haikuTutorial(BuildContext context) {
         );
       });
 }
+
+
